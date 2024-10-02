@@ -1,8 +1,8 @@
-import {useNavigation as useReactNativeNavigation} from '@react-navigation/native';
-import {RootRouteProp} from '@/navigation/types';
+import {useRoute as useReactNativeRout} from '@react-navigation/native';
+import { RootRouteProp, RootStackParamList } from '@/navigation/types';
 
-export const useRoute = () => {
-  const route = useReactNativeNavigation<RootRouteProp>();
+export const useRoute = <TScreen extends keyof RootStackParamList>() => {
+  const route = useReactNativeRout<RootRouteProp<TScreen>>();
 
   return {...route};
 };

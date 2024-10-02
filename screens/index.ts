@@ -1,2 +1,2 @@
-export {default as Task} from './task';
-export {default as TaskDetails} from './task-details';
+export {default as Task} from './Task';
+export {default as TaskDetails} from './TaskDetails';

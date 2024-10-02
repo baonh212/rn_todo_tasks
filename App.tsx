@@ -1,7 +1,12 @@
 import 'react-native-gesture-handler';
 
 import RootStack from './navigation';
+import {TaskProvider} from '@/context/TaskContext';
 
 export default function App() {
-  return <RootStack />;
+  return (
+    <TaskProvider>
+      <RootStack />
+    </TaskProvider>
+  );
 }
