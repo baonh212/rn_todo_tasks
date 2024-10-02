@@ -157,7 +157,6 @@ export default function Task() {
             item={item}
             headerColumns={headerColumns}
             onPress={task => {
-              console.log('Task ', task);
               navigation.navigate(RouteKey.TaskDetailScreen, {task});
             }}
           />

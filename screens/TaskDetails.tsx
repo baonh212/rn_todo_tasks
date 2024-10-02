@@ -70,26 +70,23 @@ export default function TaskDetails() {
     hideDatePicker();
   }, []);
 
-  const pickImageAsync = useCallback(
-    () => async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: false,
-        quality: 0.5,
-      });
+  const pickImageAsync = useCallback(async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: false,
+      quality: 0.5,
+    })
 
-      if (!result.canceled) {
-        const imageUrls = result.assets.map(a => a.uri);
-        updateTaskImage(taskDetails.id!, imageUrls);
-        onChangeTaskDetails('attachedImages', [
-          ...(taskDetails.attachedImages ?? []),
-          ...imageUrls,
-        ]);
-      } else {
-        alert('You did not select any image.');
-      }
-    },
-    [taskDetails.id, taskDetails.attachedImages],
-  );
+    if (!result.canceled) {
+      const imageUrls = result.assets.map(a => a.uri);
+      updateTaskImage(taskDetails.id!, imageUrls);
+      onChangeTaskDetails('attachedImages', [
+        ...(taskDetails.attachedImages ?? []),
+        ...imageUrls,
+      ]);
+    } else {
+      alert('You did not select any image.');
+    }
+  }, [taskDetails.id, taskDetails.attachedImages]);
 
   const toggleCameraFacing = useCallback(() => {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
@@ -200,7 +197,7 @@ export default function TaskDetails() {
           <Button
             title={'Take Photo'}
             onPress={() => {
-              if (!permission) {
+              if (!permission?.granted) {
                 requestPermission().then(response => {
                   if (response.granted) {
                     setIsCameraVisible(true);
